@@ -5,17 +5,15 @@
 #include <netinet/in.h>
 #include <unistd.h>
 #include <time.h>
-
 #define BACKLOG 10
 
 int main(int argc, char **argv){
   if(argc != 2){
-    printf("Usage: %s <port>\n", argv[0]);
+    printf("Enter the Port No \n");
     exit(0);
   }
 
   int port = atoi(argv[1]);
-  printf("Port: %d\n", port);
 
   int n_client = 0;
   int sockfd = socket(AF_INET, SOCK_STREAM, 0);
@@ -25,10 +23,8 @@ int main(int argc, char **argv){
   serverAddress.sin_port = htons(port);
 
   bind(sockfd, (struct sockaddr*)&serverAddress, sizeof(serverAddress));
-  printf("[+]Bind\n");
-
   listen(sockfd, BACKLOG);
-  printf("[+]Listening for the client\n");
+  printf("Listening on port %d\n",port);
 
   int i = 1;
   while(i){
@@ -36,7 +32,7 @@ int main(int argc, char **argv){
     n_client++;
     time_t currentTime;
     time(&currentTime);
-    printf("Client %d requested for time at %s", n_client, ctime(&currentTime));
+    printf("Client %d requested at %s", n_client, ctime(&currentTime));
     send(client_socket, ctime(&currentTime), 30, 0);
   }
 

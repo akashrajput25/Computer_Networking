@@ -8,7 +8,7 @@
 
 int main(int argc, char **argv){
   if(argc != 2){
-    printf("Usage: %s <port>\n", argv[0]);
+    printf("Enter Port Address");
     exit(0);
   }
 
@@ -23,7 +23,7 @@ int main(int argc, char **argv){
   serverAddress.sin_port = htons(port);
 
   connect(sockfd, (struct sockaddr*)&serverAddress, sizeof(serverAddress));
-  printf("[+]Connected to the server\n");
+  printf("Connected to the server\n");
 
   recv(sockfd, response, 29, 0);
   printf("Time from server: %s", response);
