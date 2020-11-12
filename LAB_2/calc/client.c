@@ -7,16 +7,16 @@
 #include <errno.h>
 
 void send_receive_integer_over_socket(int sockfd) { 
-    int int_to_send;
+    int int_to_send,sum,x_sq,two_x; 
     printf("enter the integer value to be sent to server\n");
     scanf("%d",&int_to_send);
-    int int_to_receive; 
- 
-    write(sockfd, &int_to_send, sizeof(int_to_send)); 
- 
-    read(sockfd, &int_to_receive, sizeof(int_to_receive)); 
- 
-    printf("Integer Received from Server : %d\n", int_to_receive); 
+    write(sockfd, &int_to_send, sizeof(int_to_send));
+     
+    read(sockfd, &x_sq, sizeof(x_sq));
+    read(sockfd, &two_x, sizeof(two_x));
+    printf("2*X: %d and X^2: %d\n",x_sq,two_x); 
+    sum=x_sq+two_x;
+    write(sockfd, &sum, sizeof(sum)); 
 } 
  
 int main(int argc, char **argv) { 

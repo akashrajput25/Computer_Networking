@@ -11,8 +11,6 @@
  
 int main(int argc, char **argv) {
     int sockfd, clientfd, port, int_to_receive,int_to_send;
-    printf("enter the integer value to be sent to client\n");
-    scanf("%d",&int_to_send);
     struct sockaddr_in s_addr, c_addr;
     char buffer[MAXBUF];
     socklen_t socklen = (socklen_t)sizeof(struct sockaddr_in);
@@ -52,7 +50,7 @@ int main(int argc, char **argv) {
  
         read(clientfd, &int_to_receive, sizeof(int_to_receive));
         //int_to_receive = ntohl(int_to_receive);
- 
+        int_to_send=int_to_receive*int_to_receive;
         write(clientfd, &int_to_send, sizeof(int_to_send));
         printf("Received from client: %d\n", int_to_receive);
  
